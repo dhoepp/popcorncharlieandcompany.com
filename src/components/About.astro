@@ -1,10 +1,11 @@
 ---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <section class="about-contact">
   <div class="about">
     <h2>About Us</h2>
-    <img src="/images/BowtieCharlie.jpg" alt="Popcorn Charlie" width="400" />
+    <img src={`${base}/images/BowtieCharlie.jpg`} alt="Popcorn Charlie" width="400" />
 
     <div>
       <h4>Personalized Service:</h4>
