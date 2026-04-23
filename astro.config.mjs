@@ -8,6 +8,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  site: 'https://popcorncharlieandcompany.com',
+  site: 'https://dhoepp.github.io',
+  base: '/popcorncharlieandcompany.com',
   output: 'static',
 });
