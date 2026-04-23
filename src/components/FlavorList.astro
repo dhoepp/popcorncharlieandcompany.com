@@ -1,0 +1,34 @@
+---
+const flavors = Array.from({ length: 28 }, (_, i) => {
+  const suffix = i === 0 ? "" : String(i + 1);
+  return `/images/PopcornCharlie_FLAVORLIST${suffix}.jpg`;
+});
+---
+
+<section class="flavor-list">
+  <div style="width:612px;height:428px;overflow:hidden;margin:0 auto 4px;">
+    <img
+      src="/images/PopcornCharlieTervisCup.jpg"
+      alt="Our Flavor List"
+      style="display:block;width:1272px;max-width:none;height:auto;margin-left:-660px;"
+    />
+  </div>
+  <div class="flavor-images">
+    {flavors.map((src, i) => <img src={src} alt={`Flavor ${i + 1}`} />)}
+  </div>
+</section>
+
+<style>
+  .flavor-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .flavor-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+</style>
