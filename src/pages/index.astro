@@ -1,16 +1,18 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteHeader from '../components/SiteHeader.astro';
-import FlavorList from '../components/FlavorList.astro';
-import About from '../components/About.astro';
-import MapBanner from '../components/MapBanner.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import FlavorList from "../components/FlavorList.astro";
+import About from "../components/About.astro";
+import MapBanner from "../components/MapBanner.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 ---
 
-<BaseLayout title='"Popcorn Charlie" & Company'>
+<BaseLayout title="Popcorn Charlie & Company">
   <SiteHeader />
   <main>
     <FlavorList />
     <About />
     <MapBanner />
   </main>
+  <SiteFooter />
 </BaseLayout>
