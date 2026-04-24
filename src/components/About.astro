@@ -127,21 +127,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   }
 
   @media (max-width: 640px) {
-    .top-row {
-      flex-direction: column;
-      padding: 24px 16px 16px;
-    }
-
-    .top-row > img {
-      width: 100%;
-    }
-
-    .contact {
-      width: 100%;
-    }
-
     .bottom-row {
-      padding: 0 16px 32px;
+      flex-direction: column;
+      padding: 16px 16px 32px;
+    }
+
+    .bottom-row > img {
+      width: 100%;
+      margin: 0;
+    }
+
+    .special-orders {
+      width: 100%;
+    }
+
+    .contact-row {
+      padding: 24px 16px 16px;
     }
   }
 </style>
