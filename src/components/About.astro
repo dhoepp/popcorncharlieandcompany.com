@@ -125,4 +125,23 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   .special-orders li {
     margin-bottom: 4px;
   }
+
+  @media (max-width: 640px) {
+    .top-row {
+      flex-direction: column;
+      padding: 24px 16px 16px;
+    }
+
+    .top-row > img {
+      width: 100%;
+    }
+
+    .contact {
+      width: 100%;
+    }
+
+    .bottom-row {
+      padding: 0 16px 32px;
+    }
+  }
 </style>
