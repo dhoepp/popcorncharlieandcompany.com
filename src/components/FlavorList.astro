@@ -8,13 +8,6 @@ const flavors = Array.from({ length: 28 }, (_, i) => {
 ---
 
 <section class="flavor-list">
-  <div style="width:612px;height:428px;overflow:hidden;margin:0 auto 4px;">
-    <img
-      src={`${base}/images/PopcornCharlieTervisCup.jpg`}
-      alt="Our Flavor List"
-      style="display:block;width:1272px;max-width:none;height:auto;margin-left:-660px;"
-    />
-  </div>
   <div class="flavor-images">
     {flavors.map((src, i) => <img src={src} alt={`Flavor ${i + 1}`} />)}
   </div>
@@ -25,6 +18,7 @@ const flavors = Array.from({ length: 28 }, (_, i) => {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 96px;
   }
 
   .flavor-images {
@@ -38,23 +32,5 @@ const flavors = Array.from({ length: 28 }, (_, i) => {
   .flavor-images img {
     max-width: 100%;
     height: auto;
-  }
-
-  .tervis-wrap {
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  @media (max-width: 640px) {
-    .tervis-wrap {
-      width: 100% !important;
-      height: auto !important;
-    }
-
-    .tervis-wrap img {
-      width: 100% !important;
-      height: auto !important;
-      margin-left: 0 !important;
-    }
   }
 </style>
