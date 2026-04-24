@@ -1,16 +1,21 @@
 ---
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <header class="site-header">
   <a href="/">
-    <img src={`${base}/images/PopcornCharlie_ROUND_LOGO.svg`} alt='"Popcorn Charlie" & Company' width="144" height="144" />
+    <img
+      src={`${base}/images/PopcornCharlie_ROUND_LOGO.svg`}
+      alt='"Popcorn Charlie" & Company'
+      width="144"
+      height="144"
+    />
   </a>
   <nav class="site-nav">
-    <a href="#about">About</a>
-    <a href="#special-orders">Special Orders</a>
-    <a href="#contact">Contact</a>
-    <a href="#map">Map</a>
+    <!-- <a href="#about">About</a> -->
+    <a href="#special-orders">About</a>
+    <a href="#contact">Store Info</a>
+    <a href="#map">Find us!</a>
   </nav>
 </header>
 
