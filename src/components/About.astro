@@ -15,7 +15,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     <div class="contact-hours">
       <h4>Hours</h4>
       <p>Open W-F: 10am-6pm | Sat: 10am-5pm</p>
-      <p><strong>We will be closed July 4–14 for maintenance and repairs. We will reopen July 15th.</strong></p>
+      <p>
+        <span class="pointing-hand">☞</span><strong
+          >We will be closed July 4–14 for maintenance and repairs. We will
+          reopen July 15th.</strong
+        >
+      </p>
     </div>
 
     <!-- <form class="contact-form">
@@ -77,6 +82,25 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   .contact-row p {
     line-height: 1.65;
+  }
+
+  .contact-row strong {
+    font-family: "Lithos Pro Black", "Phosphate", "Bebas Neue", Impact, serif;
+    font-weight: 900;
+  }
+
+  @keyframes bounce-right {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(14px); }
+  }
+
+  .pointing-hand {
+    display: inline-block;
+    font-size: 2.4em;
+    position: relative;
+    top: 0.125in;
+    left: -0.25in;
+    animation: bounce-right 1.4s ease-in-out infinite;
   }
 
   .contact-info a {
