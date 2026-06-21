@@ -138,10 +138,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   @keyframes bounce-right {
     0%,
     100% {
-      transform: translateX(0);
+      transform: translateY(-50%) translateX(0);
     }
     50% {
-      transform: translateX(14px);
+      transform: translateY(-50%) translateX(14px);
     }
   }
 
@@ -153,7 +153,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   .pointing-hand {
     position: absolute;
-    height: 7.5rem;
+    height: 9.5rem;
     width: auto;
     right: 100%;
     top: 50%;
