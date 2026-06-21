@@ -15,18 +15,29 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       <ul class="hours-list">
         <li><span class="day">Sunday</span><span class="time">Closed</span></li>
         <li><span class="day">Monday</span><span class="time">Closed</span></li>
-        <li><span class="day">Tuesday</span><span class="time">Closed</span></li>
-        <li><span class="day">Wednesday</span><span class="time">10am – 6pm</span></li>
-        <li><span class="day">Thursday</span><span class="time">10am – 6pm</span></li>
-        <li><span class="day">Friday</span><span class="time">10am – 6pm</span></li>
-        <li><span class="day">Saturday</span><span class="time">10am – 5pm</span></li>
+        <li>
+          <span class="day">Tuesday</span><span class="time">Closed</span>
+        </li>
+        <li>
+          <span class="day">Wednesday</span><span class="time">10am – 6pm</span>
+        </li>
+        <li>
+          <span class="day">Thursday</span><span class="time">10am – 6pm</span>
+        </li>
+        <li>
+          <span class="day">Friday</span><span class="time">10am – 6pm</span>
+        </li>
+        <li>
+          <span class="day">Saturday</span><span class="time">10am – 5pm</span>
+        </li>
       </ul>
-      <p>
-        <span class="pointing-hand">☞</span><strong
-          >We will be closed July 4–14 for maintenance and repairs. We will
-          reopen July 15th.</strong
+      <div class="closure-notice">
+        <img class="pointing-hand" src="/PointingHand.png" />
+        <strong
+          >We will be closed July 4–14 <br /> for maintenance and repairs. <br
+          />We will reopen July 15th.</strong
         >
-      </p>
+      </div>
     </div>
 
     <!-- <form class="contact-form">
@@ -87,7 +98,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   }
 
   .contact-row h4.name {
-    font-size: 2.2rem;
+    font-size: 1.6rem;
   }
 
   .contact-row p {
@@ -125,16 +136,29 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   }
 
   @keyframes bounce-right {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(14px); }
+    0%,
+    100% {
+      transform: translateY(-50%) translateX(0);
+    }
+    50% {
+      transform: translateY(-50%) translateX(14px);
+    }
+  }
+
+  .closure-notice {
+    position: relative;
+    text-align: center;
+    overflow: visible;
   }
 
   .pointing-hand {
-    display: inline-block;
-    font-size: 2.4em;
-    position: relative;
-    top: 0.125in;
-    left: -0.25in;
+    position: absolute;
+    height: 9.5rem;
+    width: auto;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: -4rem;
     animation: bounce-right 1.4s ease-in-out infinite;
   }
 
@@ -199,6 +223,21 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     .contact-row {
       padding: 24px 16px 16px;
+    }
+
+    .contact-row strong {
+      font-size: 1rem;
+      text-align: right;
+      display: block;
+    }
+
+    .closure-notice {
+      padding: 32px 0 16px;
+    }
+
+    .pointing-hand {
+      height: 4rem;
+      margin-right: -6rem;
     }
   }
 </style>
