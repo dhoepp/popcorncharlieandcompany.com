@@ -1,7 +1,9 @@
 ---
+
 ---
 
-<div id="map" style="width:60%;margin:0 auto;">
+<div id="map" class="map-wrapper">
+  <h2>Find us on the map!</h2>
   <iframe
     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2978.0!2d-90.5776!3d41.5497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87e2365c2e2e2e2f%3A0x0!2s3601+N+Division+St%2C+Davenport%2C+IA+52806!5e0!3m2!1sen!2sus!4v1"
     width="100%"
@@ -10,6 +12,25 @@
     allowfullscreen
     loading="lazy"
     referrerpolicy="no-referrer-when-downgrade"
-    title="Popcorn Charlie & Company location"
-  ></iframe>
+    title="Popcorn Charlie & Company location"></iframe>
 </div>
+
+<style>
+  .map-wrapper {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .map-wrapper h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .map-wrapper {
+      width: 100%;
+    }
+  }
+</style>

@@ -4,17 +4,36 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 <section id="about">
   <div class="contact-row" id="contact">
-    <h2>Store Information</h2>
-
     <div class="contact-info">
-      <h4>"Popcorn Charlie" and Company</h4>
-      <p>3601 North Division Street, Davenport, Iowa 52806, United States</p>
+      <h4 class="name">"Popcorn Charlie" and Company</h4>
+      <p>
+        3601 North Division Street<br /> Davenport, Iowa 52806<br /> United States
+        of America
+      </p>
       <a href="tel:5633889555">563-388-9555</a>
     </div>
 
     <div class="contact-hours">
       <h4>Hours</h4>
-      <p>Open W-F: 10:00 am – 06:00 pm (10-5 Saturday)</p>
+      <ul class="hours-list">
+        <li><span class="day">Sunday</span><span class="time">Closed</span></li>
+        <li><span class="day">Monday</span><span class="time">Closed</span></li>
+        <li>
+          <span class="day">Tuesday</span><span class="time">Closed</span>
+        </li>
+        <li>
+          <span class="day">Wednesday</span><span class="time">10am – 6pm</span>
+        </li>
+        <li>
+          <span class="day">Thursday</span><span class="time">10am – 6pm</span>
+        </li>
+        <li>
+          <span class="day">Friday</span><span class="time">10am – 6pm</span>
+        </li>
+        <li>
+          <span class="day">Saturday</span><span class="time">10am – 5pm</span>
+        </li>
+      </ul>
     </div>
 
     <!-- <form class="contact-form">
@@ -30,28 +49,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     <img src={`${base}/images/BowtieCharlie.jpg`} alt="Popcorn Charlie" />
 
     <div class="special-orders" id="special-orders">
-      <h4>Personalized Service:</h4>
+      <h4>We take requests!</h4>
       <p>
-        We also take special requests. If you want a flavor that is out of
-        season or only available upon request, we will make it for you! The only
-        catch is: you have to meet a minimum purchase amount:
+        If you want a flavor that is out of season or only available upon
+        request, we will make it for you! The only catch is you have to meet a
+        minimum purchase amount:
+        <ul>
+          <li>3 gallons per single flavor/color</li>
+          <li>10 gallons for custom combos</li>
+        </ul>
       </p>
-      <ul>
-        <li>$20 for Savory Flavors</li>
-        <li>$30 for Candied Flavors</li>
-        <li>$35 for Candied+ Flavors</li>
-        <li>$40 for Premium Candied Flavors</li>
-      </ul>
-
-      <h4>Committed to Quality</h4>
-      <p><!-- content to be filled in --></p>
 
       <h4>100% Satisfaction Guaranteed</h4>
       <p>
         Our popcorn is guaranteed fresh for one month after the packaged date.
         We want you to be completely satisfied, so if you experience any issues
-        with the product, please contact us right away so we can address the
-        problem.
+        with the product, please contact us right away so we can make it right.
       </p>
     </div>
   </div>
@@ -77,8 +90,72 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     margin: 20px 0 6px;
   }
 
+  .contact-row h4.name {
+    font-size: 1.8rem;
+  }
+
   .contact-row p {
     line-height: 1.65;
+  }
+
+  .hours-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px auto 0;
+    display: inline-block;
+    text-align: left;
+  }
+
+  .hours-list li {
+    display: flex;
+    gap: 16px;
+    line-height: 1.8;
+  }
+
+  .hours-list .day {
+    width: 100px;
+    font-weight: 600;
+  }
+
+  .hours-list .time {
+    color: #555;
+  }
+
+  .contact-row strong {
+    font-family: "Lithos Pro Black", "Phosphate", "Bebas Neue", Impact, serif;
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: red;
+  }
+
+  @keyframes bounce-right {
+    0%,
+    100% {
+      transform: translateY(-50%) translateX(0);
+    }
+    50% {
+      transform: translateY(-50%) translateX(14px);
+    }
+  }
+
+  .closure-notice {
+    position: relative;
+    text-align: center;
+    overflow: visible;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 0;
+  }
+
+  .pointing-hand {
+    position: absolute;
+    height: 9.5rem;
+    width: auto;
+    left: -10vw;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: bounce-right 1.4s ease-in-out infinite;
   }
 
   .contact-info a {
@@ -142,6 +219,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     .contact-row {
       padding: 24px 16px 16px;
+    }
+
+    .contact-row strong {
+      font-size: 1.2rem;
+      text-align: right;
+      display: block;
+      padding-right: 15px;
+    }
+
+    .closure-notice {
+      padding: 16px 0;
+    }
+
+    .pointing-hand {
+      height: 4rem;
+      left: -25vw;
     }
   }
 </style>

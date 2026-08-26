@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+body {
+  font-family: "Marker Felt", "Patrick Hand", serif;
+  font-weight: 100;
+}
+.name {
+    font-family: "Lithos Pro Black", "Phosphate", "Bebas Neue", Impact, serif;
+    text-transform: uppercase;
+}
