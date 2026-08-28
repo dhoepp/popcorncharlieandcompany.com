@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import AnnouncementBanner from "../components/AnnouncementBanner.astro";
 interface Props {
   title: string;
 }
@@ -28,6 +29,7 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
+    <AnnouncementBanner />
     <slot />
     <a href="#" class="back-to-top" aria-label="Return to top">↑</a>
   </body>
