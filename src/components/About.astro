@@ -16,7 +16,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     <div class="contact-hours">
       <div class="hours-heading">
         <img
-          class="pointing-hand"
+          class="hours-pointing-hand"
           src={`${base}/PointingHand.png`}
           alt=""
         />
@@ -138,6 +138,36 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   @keyframes bounce-right {
     0%,
     100% {
+      transform: translateY(-50%) translateX(0);
+    }
+    50% {
+      transform: translateY(-50%) translateX(14px);
+    }
+  }
+
+  .closure-notice {
+    position: relative;
+    text-align: center;
+    overflow: visible;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 0;
+  }
+
+  .pointing-hand {
+    position: absolute;
+    height: 9.5rem;
+    width: auto;
+    left: -10vw;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: bounce-right 1.4s ease-in-out infinite;
+  }
+
+  @keyframes hours-hand-bounce {
+    0%,
+    100% {
       transform: translateX(0);
     }
     50% {
@@ -157,10 +187,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     margin: 0;
   }
 
-  .pointing-hand {
+  .hours-pointing-hand {
     height: 2rem;
     width: auto;
-    animation: bounce-right 1.4s ease-in-out infinite;
+    animation: hours-hand-bounce 1.4s ease-in-out infinite;
   }
 
   .contact-info a {
@@ -233,7 +263,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       padding-right: 15px;
     }
 
+    .closure-notice {
+      padding: 16px 0;
+    }
+
     .pointing-hand {
+      height: 4rem;
+      left: -25vw;
+    }
+
+    .hours-pointing-hand {
       height: 1.6rem;
     }
   }
