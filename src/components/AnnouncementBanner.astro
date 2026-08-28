@@ -1,4 +1,4 @@
-<a href="#about">
+<a href="#about" id="announcement-banner">
   <div class="announcement-banner">New hours starting September 1st!</div>
 </a>
 
@@ -21,3 +21,11 @@
     box-sizing: border-box;
   }
 </style>
+
+<script>
+  const EXPIRES = new Date("2026-09-30T23:59:59");
+  const banner = document.getElementById("announcement-banner");
+  if (banner && Date.now() > EXPIRES.getTime()) {
+    banner.style.display = "none";
+  }
+</script>
