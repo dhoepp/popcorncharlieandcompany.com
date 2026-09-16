@@ -24,4 +24,4 @@ pnpm-debug.log*
 .idea/
 
 # site migration assets
-old/
+#old/
