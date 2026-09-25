@@ -1,8 +1,24 @@
-<a href="#about" id="announcement-banner">
-  <div class="announcement-banner">New hours starting September 1st!</div>
+---
+interface Props {
+  href?: string;
+  expires: string;
+  background?: string;
+}
+
+const { href = "#about", expires, background = "#c0392b" } = Astro.props;
+---
+
+<a href={href} class="announcement-link" data-expires={expires}>
+  <div class="announcement-banner" style={`background: ${background};`}>
+    <slot />
+  </div>
 </a>
 
 <style>
+  .announcement-link {
+    text-decoration: none;
+  }
+
   .announcement-banner {
     width: 100vw;
     position: relative;
@@ -10,7 +26,6 @@
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    background: #c0392b;
     color: #fff;
     text-align: center;
     font-family: inherit;
@@ -23,9 +38,10 @@
 </style>
 
 <script>
-  const EXPIRES = new Date("2026-09-30T23:59:59");
-  const banner = document.getElementById("announcement-banner");
-  if (banner && Date.now() > EXPIRES.getTime()) {
-    banner.style.display = "none";
-  }
+  document.querySelectorAll<HTMLElement>(".announcement-link").forEach((banner) => {
+    const expires = new Date(banner.dataset.expires ?? "");
+    if (Date.now() > expires.getTime()) {
+      banner.style.display = "none";
+    }
+  });
 </script>
