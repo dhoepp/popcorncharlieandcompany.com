@@ -29,12 +29,9 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <AnnouncementBanner expires="2026-09-26T23:59:59" background="#a04000">
+    <AnnouncementBanner expires="2026-09-26T23:59:59">
       Available for a limited time! Friday 9/25 &amp; Saturday 9/26:
       Schnitzelwurst Currycatsup and Tales from the Campfire hot sauce!
-    </AnnouncementBanner>
-    <AnnouncementBanner expires="2026-09-30T23:59:59">
-      New hours starting September 1st!
     </AnnouncementBanner>
     <slot />
     <a href="#" class="back-to-top" aria-label="Return to top">↑</a>
