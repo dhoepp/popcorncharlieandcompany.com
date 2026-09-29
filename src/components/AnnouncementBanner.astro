@@ -1,24 +1,17 @@
 ---
-interface Props {
-  href?: string;
-  expires: string;
-  background?: string;
-}
-
-const { href = "#about", expires, background = "#c0392b" } = Astro.props;
+// Banner text lives in site-content/banner.txt so non-developers can edit it.
+// glob (instead of a direct import) keeps the build working if the file is deleted.
+const files = import.meta.glob("/site-content/banner.txt", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+const text = (Object.values(files)[0] ?? "").trim();
 ---
 
-<a href={href} class="announcement-link" data-expires={expires}>
-  <div class="announcement-banner" style={`background: ${background};`}>
-    <slot />
-  </div>
-</a>
+{text && <div class="announcement-banner">{text}</div>}
 
 <style>
-  .announcement-link {
-    text-decoration: none;
-  }
-
   .announcement-banner {
     width: 100vw;
     position: relative;
@@ -26,6 +19,7 @@ const { href = "#about", expires, background = "#c0392b" } = Astro.props;
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
+    background: #c0392b;
     color: #fff;
     text-align: center;
     font-family: inherit;
@@ -36,12 +30,3 @@ const { href = "#about", expires, background = "#c0392b" } = Astro.props;
     box-sizing: border-box;
   }
 </style>
-
-<script>
-  document.querySelectorAll<HTMLElement>(".announcement-link").forEach((banner) => {
-    const expires = new Date(banner.dataset.expires ?? "");
-    if (Date.now() > expires.getTime()) {
-      banner.style.display = "none";
-    }
-  });
-</script>

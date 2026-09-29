@@ -1,0 +1,140 @@
+---
+// Discovers every image in site-content/promo at build time.
+// 0 images: renders nothing. 1 image: static. 2+: auto-advancing carousel.
+const modules = import.meta.glob(
+  "/site-content/promo/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}",
+  { eager: true, import: "default" }
+) as Record<string, ImageMetadata>;
+
+// Sorted by file name so the stakeholder controls order with 01-, 02-, ...
+const images = Object.entries(modules)
+  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+  .map(([, img]) => img.src);
+const isCarousel = images.length > 1;
+---
+
+{
+  images.length > 0 && (
+    <section class="promo" aria-label="Promotions">
+      <div class="promo-frame" data-carousel={isCarousel ? "" : undefined}>
+        {images.map((src, i) => (
+          <img
+            src={src}
+            alt={`Promotion ${i + 1} of ${images.length}`}
+            class:list={["promo-slide", { active: i === 0 }]}
+            loading={i === 0 ? "eager" : "lazy"}
+          />
+        ))}
+        {isCarousel && (
+          <div class="promo-dots">
+            {images.map((_, i) => (
+              <button
+                class:list={["promo-dot", { active: i === 0 }]}
+                aria-label={`Show promotion ${i + 1}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<script>
+  // Seconds between automatic slide changes.
+  const SLIDE_SECONDS = 4;
+
+  const frame = document.querySelector<HTMLElement>("[data-carousel]");
+  if (frame) {
+    const slides = frame.querySelectorAll<HTMLImageElement>(".promo-slide");
+    const dots = frame.querySelectorAll<HTMLButtonElement>(".promo-dot");
+    let current = 0;
+    let timer: number | undefined;
+
+    const show = (n: number) => {
+      current = (n + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle("active", i === current));
+      dots.forEach((d, i) => d.classList.toggle("active", i === current));
+    };
+    const stop = () => window.clearInterval(timer);
+    const start = () => {
+      stop();
+      timer = window.setInterval(() => show(current + 1), SLIDE_SECONDS * 1000);
+    };
+
+    dots.forEach((d, i) =>
+      d.addEventListener("click", () => {
+        show(i);
+        start();
+      })
+    );
+
+    // Skip auto-advance for users who ask for reduced motion.
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      start();
+      frame.addEventListener("mouseenter", stop);
+      frame.addEventListener("mouseleave", start);
+      frame.addEventListener("focusin", stop);
+      frame.addEventListener("focusout", start);
+    }
+  }
+</script>
+
+<style>
+  .promo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 96px;
+  }
+
+  .promo-frame {
+    position: relative;
+    width: 612px;
+    max-width: 100%;
+    aspect-ratio: 612 / 792;
+  }
+
+  .promo-slide {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* Carousel: stack slides and cross-fade */
+  [data-carousel] .promo-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  [data-carousel] .promo-slide.active {
+    opacity: 1;
+  }
+
+  .promo-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .promo-dot {
+    width: 12px;
+    height: 12px;
+    padding: 0;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+  }
+
+  .promo-dot.active {
+    background: #fff;
+  }
+</style>
