@@ -4,12 +4,12 @@
 const modules = import.meta.glob(
   "/site-content/promo/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}",
   { eager: true, import: "default" }
-) as Record<string, string>;
+) as Record<string, ImageMetadata>;
 
 // Sorted by file name so the stakeholder controls order with 01-, 02-, ...
 const images = Object.entries(modules)
   .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
-  .map(([, url]) => url);
+  .map(([, img]) => img.src);
 const isCarousel = images.length > 1;
 ---
 
