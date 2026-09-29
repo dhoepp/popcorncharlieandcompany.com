@@ -1,0 +1,49 @@
+name: Auto-merge content PRs
+
+# Merges pull requests that ONLY touch site-content/ so content editors don't
+# need a reviewer. Any PR that touches anything else is left alone.
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  auto-merge:
+    # Same-repo branches only (forks don't get a write token, and shouldn't).
+    if: github.event.pull_request.head.repo.full_name == github.repository && !github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check that every changed file is under site-content/
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Includes previous_filename so a rename from outside site-content/ is caught.
+          gh api --paginate "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files" \
+            | jq -s 'add' > files.json
+          if jq -e 'length > 0 and all(.[]; (.filename | startswith("site-content/")) and ((.previous_filename // "site-content/") | startswith("site-content/")))' files.json > /dev/null; then
+            echo "content_only=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "content_only=false" >> "$GITHUB_OUTPUT"
+            echo "PR touches files outside site-content/; leaving it for manual review."
+          fi
+
+      - name: Merge
+        if: steps.check.outputs.content_only == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr merge "${{ github.event.pull_request.html_url }}" --squash --delete-branch
+
+      # Merges made with the built-in token don't trigger other workflows, so
+      # start the deploy ourselves.
+      - name: Trigger deploy
+        if: steps.check.outputs.content_only == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --repo "${{ github.repository }}" --ref main

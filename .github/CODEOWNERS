@@ -1,0 +1,6 @@
+# Everything requires review from the owner...
+*                @dhoepp
+
+# ...except site-content/, which is intentionally left with no owner so
+# content-only PRs don't need a code-owner review (see auto-merge-content.yml).
+/site-content/
