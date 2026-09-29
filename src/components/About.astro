@@ -14,7 +14,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     </div>
 
     <div class="contact-hours">
-      <h4>Hours</h4>
+      <div class="closure-notice">
+        <img class="pointing-hand" src={`${base}/PointingHand.png`} alt="" />
+        <h4>"New" Hours</h4>
+      </div>
       <ul class="hours-list">
         <li><span class="day">Sunday</span><span class="time">Closed</span></li>
         <li><span class="day">Monday</span><span class="time">Closed</span></li>
@@ -158,6 +161,34 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     animation: bounce-right 1.4s ease-in-out infinite;
   }
 
+  @keyframes hours-hand-bounce {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(10px);
+    }
+  }
+
+  .hours-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0 6px;
+  }
+
+  .hours-heading h4 {
+    margin: 0;
+  }
+
+  .hours-pointing-hand {
+    height: 2rem;
+    width: auto;
+    animation: hours-hand-bounce 1.4s ease-in-out infinite;
+  }
+
   .contact-info a {
     display: inline-block;
     margin-top: 6px;
@@ -235,6 +266,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     .pointing-hand {
       height: 4rem;
       left: -25vw;
+    }
+
+    .hours-pointing-hand {
+      height: 1.6rem;
     }
   }
 </style>
