@@ -1,6 +1,15 @@
-<div class="announcement-banner">
-  New hours starting September 1st!
-</div>
+---
+// Banner text lives in site-content/banner.txt so non-developers can edit it.
+// glob (instead of a direct import) keeps the build working if the file is deleted.
+const files = import.meta.glob("/site-content/banner.txt", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+const text = (Object.values(files)[0] ?? "").trim();
+---
+
+{text && <div class="announcement-banner">{text}</div>}
 
 <style>
   .announcement-banner {
