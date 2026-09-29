@@ -1,10 +1,14 @@
 name: Auto-merge content PRs
 
-# Merges pull requests that ONLY touch site-content/ so content editors don't
-# need a reviewer. Any PR that touches anything else is left alone.
+# Merges pull requests that (1) were opened by an allowed content editor and
+# (2) ONLY touch site-content/. Anything else is left for manual review.
+#
+# Uses pull_request_target so the workflow that runs is always the one on
+# main; a PR can't edit this file to change its own rules. It is safe because
+# the job never checks out or executes PR code, it only reads the file list.
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, reopened, synchronize, ready_for_review]
     branches: [main]
 
@@ -13,25 +17,39 @@ permissions:
   pull-requests: write
   actions: write
 
+env:
+  # Space-separated GitHub usernames allowed to auto-merge content PRs.
+  # Add the stakeholder's username here once they have an account.
+  CONTENT_EDITORS: "dhoepp"
+
 jobs:
   auto-merge:
-    # Same-repo branches only (forks don't get a write token, and shouldn't).
+    # Same-repo branches only (never forks) and never drafts.
     if: github.event.pull_request.head.repo.full_name == github.repository && !github.event.pull_request.draft
     runs-on: ubuntu-latest
     steps:
-      - name: Check that every changed file is under site-content/
+      - name: Check author and changed files
         id: check
         env:
           GH_TOKEN: ${{ github.token }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
+          echo "content_only=false" >> "$GITHUB_OUTPUT"
+
+          if ! echo " $CONTENT_EDITORS " | grep -qi " $AUTHOR "; then
+            echo "$AUTHOR is not an allowed content editor; leaving for manual review."
+            exit 0
+          fi
+
           # Includes previous_filename so a rename from outside site-content/ is caught.
-          gh api --paginate "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files" \
+          gh api --paginate "repos/${{ github.repository }}/pulls/$PR_NUMBER/files" \
             | jq -s 'add' > files.json
+
           if jq -e 'length > 0 and all(.[]; (.filename | startswith("site-content/")) and ((.previous_filename // "site-content/") | startswith("site-content/")))' files.json > /dev/null; then
             echo "content_only=true" >> "$GITHUB_OUTPUT"
           else
-            echo "content_only=false" >> "$GITHUB_OUTPUT"
-            echo "PR touches files outside site-content/; leaving it for manual review."
+            echo "PR touches files outside site-content/; leaving for manual review."
           fi
 
       - name: Merge

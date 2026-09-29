@@ -2,5 +2,8 @@
 *                @dhoepp
 
 # ...except site-content/, which is intentionally left with no owner so
-# content-only PRs don't need a code-owner review (see auto-merge-content.yml).
+# content-only PRs from an allowed editor don't need a review
+# (see .github/workflows/auto-merge-content.yml).
+# TODO: once the stakeholder has a GitHub account, add them to CONTENT_EDITORS
+# in that workflow, and optionally list them here: /site-content/  @username
 /site-content/
