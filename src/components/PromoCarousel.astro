@@ -1,25 +1,28 @@
 ---
-// Discovers every image in site-content/promo at build time.
+// Shows every image from site-content/promo, as prepared by
+// scripts/prepare-promo.mjs (HEIC converted, resized) into src/generated/promo.
 // 0 images: renders nothing. 1 image: static. 2+: auto-advancing carousel.
 const modules = import.meta.glob(
-  "/site-content/promo/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}",
+  "/src/generated/promo/*.jpg",
   { eager: true, import: "default" }
 ) as Record<string, ImageMetadata>;
 
 // Sorted by file name so the stakeholder controls order with 01-, 02-, ...
 const images = Object.entries(modules)
   .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
-  .map(([, img]) => img.src);
+  .map(([, img]) => img);
+// The first image decides the frame shape; later ones are cropped to fit.
+const ratio = images.length ? `${images[0].width} / ${images[0].height}` : "612 / 792";
 const isCarousel = images.length > 1;
 ---
 
 {
   images.length > 0 && (
     <section class="promo" aria-label="Promotions">
-      <div class="promo-frame" data-carousel={isCarousel ? "" : undefined}>
-        {images.map((src, i) => (
+      <div class="promo-frame" data-carousel={isCarousel ? "" : undefined} style={`aspect-ratio: ${ratio}`}>
+        {images.map((img, i) => (
           <img
-            src={src}
+            src={img.src}
             alt={`Promotion ${i + 1} of ${images.length}`}
             class:list={["promo-slide", { active: i === 0 }]}
             loading={i === 0 ? "eager" : "lazy"}
@@ -92,7 +95,6 @@ const isCarousel = images.length > 1;
     position: relative;
     width: 612px;
     max-width: 100%;
-    aspect-ratio: 612 / 792;
   }
 
   .promo-slide {

@@ -6,7 +6,8 @@ const files = import.meta.glob("/site-content/banner.txt", {
   import: "default",
   eager: true,
 }) as Record<string, string>;
-const text = (Object.values(files)[0] ?? "").trim();
+// Normalize Windows line endings; CSS (white-space: pre-line) keeps the line breaks.
+const text = (Object.values(files)[0] ?? "").replace(/\r\n?/g, "\n").trim();
 ---
 
 {text && <div class="announcement-banner">{text}</div>}
@@ -28,5 +29,6 @@ const text = (Object.values(files)[0] ?? "").trim();
     letter-spacing: 0.02em;
     padding: 10px 16px;
     box-sizing: border-box;
+    white-space: pre-line;
   }
 </style>

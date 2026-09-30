@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 # site migration assets
 #old/
+# generated promo images (see scripts/prepare-promo.mjs)
+src/generated/
