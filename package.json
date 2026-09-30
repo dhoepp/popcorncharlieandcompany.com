@@ -6,7 +6,9 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "predev": "node scripts/prepare-promo.mjs",
     "dev": "astro dev",
+    "prebuild": "node scripts/prepare-promo.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -15,5 +17,9 @@
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.1.9",
     "tailwindcss": "^4.2.4"
+  },
+  "devDependencies": {
+    "heic-convert": "^2.1.0",
+    "sharp": "^0.35.5"
   }
 }

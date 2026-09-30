@@ -2,12 +2,11 @@
 
 Any image placed in this folder automatically appears at the top of the homepage, above the flavor list.
 
-## Image specs
+## What to upload
 
-- **Size: 612 x 792 pixels** (portrait, same as the flavor list image)
-- **Resolution: 72 DPI**
-- **Format:** JPG (best), PNG, or WebP
-- **File size:** under about 500 KB so the page loads quickly
+- **Formats:** JPG, PNG, WebP, or **HEIC/HEIF (straight from an iPhone is fine)**
+- **Size:** anything works. Photos are automatically rotated, converted, and shrunk for the web, so there is no need to resize first.
+- **Shape:** portrait (taller than wide) looks best, and 3:4 or 612 x 792 matches the flavor list. The **first** image decides the shape of the box; if later images are a different shape they get cropped to fit, so try to keep them all the same shape.
 
 ## How it works
 
@@ -18,7 +17,7 @@ Any image placed in this folder automatically appears at the top of the homepage
 ## Order
 
 Images play in alphabetical order by file name. To control the order, start names with numbers:
-`01-summer-sale.jpg`, `02-new-flavor.jpg`, `03-holiday.jpg`
+`01-summer-sale.jpg`, `02-new-flavor.heic`, `03-holiday.jpg`
 
 ## Removing an image
 

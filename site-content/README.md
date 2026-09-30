@@ -4,7 +4,7 @@ Changes here show up on the live site a few minutes after they are saved (commit
 
 ## Banner (red bar at the top of every page)
 
-Edit `banner.txt`. Whatever text is in that file appears in the banner.
+Edit `banner.txt`. Whatever text is in that file appears in the banner. Each new line you type shows as its own line in the banner.
 **If the file is empty, the banner disappears.**
 
 ## Promo images (top of the homepage)
