@@ -20,7 +20,7 @@ permissions:
 env:
   # Space-separated GitHub usernames allowed to auto-merge content PRs.
   # Add the stakeholder's username here once they have an account.
-  CONTENT_EDITORS: "dhoepp"
+  CONTENT_EDITORS: "dhoepp johnatpopcorncharlieandcompany"
 
 jobs:
   auto-merge:
